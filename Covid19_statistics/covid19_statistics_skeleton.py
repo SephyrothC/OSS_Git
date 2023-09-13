@@ -25,7 +25,6 @@ for idx, pop in enumerate(n_people):
 print()
 
 # TODO) Print COVID-19 new cases by region
-# Print population by region
 print('### COVID-19 cases by Region')
 print('* Total cases:', sum_covid)
 print() # Print an empty line
