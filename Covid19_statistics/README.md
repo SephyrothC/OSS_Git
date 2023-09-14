@@ -1,6 +1,7 @@
 # COVID-19 Statestics
 
-## To do 
+## To do
+
 * [x] Calculate the number of cases per its population
 * [x] Calculate the total number of people  
 * [x] Calculate the total number of new cases
@@ -8,7 +9,9 @@
 * [x] Print COVID-19 new cases by region
 
 ## Results
+
 ### Korean Population by Region
+
 * Total population: 51669716
 
 | Region | Population | Ratio (%) |
@@ -30,7 +33,9 @@
 | Ulsan | 1124459 | 2.2 |
 | Jeju | 675883 | 1.3 |
 | Sejong | 365309 | 0.7 |
+
 ### COVID-19 cases by Region
+
 * Total cases: 1714
 
 | Region | New Cases | Ratio (%) | New cases / 1M |
@@ -59,7 +64,7 @@
   
 ![](./Figure_1.png)
 
-#### code :
+#### code
 
 ```py
 plt.bar(regions, n_covid ,label="COVID-19", width = 0.8, color = ['blue']) # view of the bar
@@ -75,7 +80,7 @@ plt.show() # show the graph
 
 ![](./Figure_2.png)
 
-### code :
+#### code
 
 ```py
 ratio = []
