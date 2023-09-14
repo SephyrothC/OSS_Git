@@ -39,13 +39,11 @@ print()
 
 
 # Graphics about the COVID-19 new cases by region
-'''
-plt.bar(regions, n_covid ,label="COVID-19", width = 0.8, color = ['blue'])
-plt.xlabel('Region')
-plt.ylabel('Number of cases per region')
-plt.title('COVID-19 new cases by region')
-plt.legend()
 
-plt.show()
+# plt.bar(regions, n_covid ,label="COVID-19", width = 0.8, color = ['blue'])
+# plt.xlabel('Region')
+# plt.ylabel('Number of cases per region')
+# plt.title('COVID-19 new cases by region')
+# plt.legend()
+# plt.show()
 
-'''
