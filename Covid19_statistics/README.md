@@ -24,3 +24,18 @@ plt.legend() # add legend
 
 plt.show() # show the graph
 ```
+
+### I have added a graph of the ratio of new cases per person by region
+
+![](./Figure_2.png)
+
+### code :
+
+```py
+ratio = []
+for idx, pop in enumerate(n_covid):
+    ratio.append(n_covid[idx]*100/n_people[idx]) # Calculate ratio
+plt.pie(ratio, labels = regions, autopct = '%1.1f%%') # view of the pie
+plt.title("Ratio of new cases per person by region") # title of the graph
+plt.show() # show the graph
+```
