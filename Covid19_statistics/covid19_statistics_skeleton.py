@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def normalize_data(n_cases, n_people, scale):
     # TODO) Calculate the number of cases per its population
     norm_cases = []
@@ -34,3 +36,14 @@ for idx, pop in enumerate(n_covid):
     ratio = (n_covid[idx]*100/n_people[idx]) # The ratio of new cases to the number of people in the region
     print('| %s | %d | %.4f |' % (regions[idx], pop, ratio))
 print()
+
+
+# Graphics about the COVID-19 new cases by region
+plt.bar(regions, n_covid, label="COVID-19", width = 0.8, color = ['blue'])
+# plt.plot(regions, n_people, label= "People")
+plt.xlabel('Region')
+plt.ylabel('Number of cases per region')
+plt.title('COVID-19 new cases by region')
+plt.legend()
+
+plt.show()
