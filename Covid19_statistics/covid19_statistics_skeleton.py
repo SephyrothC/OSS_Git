@@ -20,17 +20,17 @@ print() # Print an empty line
 print('| Region | Population | Ratio (%) |')
 print('| ------ | ---------- | --------- |')
 for idx, pop in enumerate(n_people):
-    ratio = (n_people[idx]*100/sum_people) # TODO) The ratio of new cases to the total
+    ratio = (n_covid[idx]*100/sum_covid) # TODO) The ratio of new cases to the total
     print('| %s | %d | %.1f |' % (regions[idx], pop, ratio))
 print()
 
 # TODO) Print COVID-19 new cases by region
 print('### COVID-19 cases by Region')
 print('* Total cases:', sum_covid)
-print() # Print an empty line
-print('| Region | Population | Ratio (%) |')
+print()
+print('| Region | New Cases | Ratio (%) |')
 print('| ------ | ---------- | --------- |')
-for idx, pop in enumerate(n_people):
-    ratio = (n_covid[idx]*100/n_people[idx]) # TODO) The ratio of new cases to the total
+for idx, pop in enumerate(n_covid):
+    ratio = (n_covid[idx]*100/n_people[idx]) # The ratio of new cases to the number of people in the region
     print('| %s | %d | %.4f |' % (regions[idx], pop, ratio))
 print()
