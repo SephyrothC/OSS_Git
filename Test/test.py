@@ -20,4 +20,3 @@ plt.title('My first graph!')
 # function to show the plot
 plt.show()
 
-print("a")
