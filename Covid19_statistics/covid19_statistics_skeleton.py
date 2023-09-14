@@ -47,3 +47,12 @@ print()
 # plt.legend()
 # plt.show()
 
+
+# Ratio of new cases per person by region
+
+ratio = []
+for idx, pop in enumerate(n_covid):
+    ratio.append(n_covid[idx]*100/n_people[idx])
+plt.pie(ratio, labels = regions, autopct = '%1.1f%%')
+plt.title("Ratio of new cases per person by region")
+plt.show()
