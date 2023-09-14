@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 def normalize_data(n_cases, n_people, scale):
     # TODO) Calculate the number of cases per its population
     norm_cases = []
-    for idx, n in enumerate(n_cases):
-        norm_cases.append(n)
+    for idx, n in enumerate(n_cases):        
+        norm_cases.append( (n_cases[idx]/n_people[idx]) * scale )
     return norm_cases
 
 regions  = ['Seoul', 'Gyeongi', 'Busan', 'Gyeongnam', 'Incheon', 'Gyeongbuk', 'Daegu', 'Chungnam', 'Jeonnam', 'Jeonbuk', 'Chungbuk', 'Gangwon', 'Daejeon', 'Gwangju', 'Ulsan', 'Jeju', 'Sejong']
@@ -22,7 +22,7 @@ print() # Print an empty line
 print('| Region | Population | Ratio (%) |')
 print('| ------ | ---------- | --------- |')
 for idx, pop in enumerate(n_people):
-    ratio = (n_covid[idx]*100/sum_covid) # TODO) The ratio of new cases to the total
+    ratio = (n_people[idx]*100/sum_people) # TODO) The ratio of new cases to the total
     print('| %s | %d | %.1f |' % (regions[idx], pop, ratio))
 print()
 
@@ -30,11 +30,11 @@ print()
 print('### COVID-19 cases by Region')
 print('* Total cases:', sum_covid)
 print()
-print('| Region | New Cases | Ratio (%) |')
-print('| ------ | ---------- | --------- |')
+print('| Region | New Cases | Ratio (%) | New cases / 1M |')
+print('| ------ | ---------- | --------- | --------- |')
 for idx, pop in enumerate(n_covid):
-    ratio = (n_covid[idx]*100/n_people[idx]) # The ratio of new cases to the number of people in the region
-    print('| %s | %d | %.4f |' % (regions[idx], pop, ratio))
+    ratio = (n_covid[idx]*100/sum_covid) # The ratio of new cases to the number of people in the region
+    print('| %s | %d | %.1f | %0.1f |' % (regions[idx], pop, ratio , norm_covid[idx]))
 print()
 
 
