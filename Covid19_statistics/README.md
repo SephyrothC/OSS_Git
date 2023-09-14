@@ -62,7 +62,7 @@
 
 ### I have added a graph of COVID-19 new cases by region
   
-![](./Figure_1.png)
+![img](./Figure_1.png)
 
 #### code
 
@@ -78,9 +78,9 @@ plt.show() # show the graph
 
 ### I have added a graph of the ratio of new cases per person by region
 
-![](./Figure_2.png)
+![img](./Figure_2.png)
 
-#### code
+#### code2
 
 ```py
 ratio = []
