@@ -52,15 +52,15 @@
 * Midterm
   * Mean: **74.209**
   * Variance: 632.817
-  * Median: **37.000**
+  * Median: **72.000**
   * Min/Max: (21.000, 117.000)
 * Final
   * Mean: **58.674**
   * Variance: 618.545
-  * Median: **35.000**
+  * Median: **66.000**
   * Min/Max: (0.000, 94.000)
 * Average
   * Mean: **58.465**
   * Variance: 423.783
-  * Median: **32.700**
+  * Median: **65.000**
   * Min/Max: (6.720, 87.760)

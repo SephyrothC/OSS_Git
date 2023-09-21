@@ -25,6 +25,7 @@ def calc_weighted_average(data_2d, weight):
           
     return average
 
+
 def analyze_data(data_1d):
     # TODO) Derive summary of the given `data_1d`
     # Note) Please don't use NumPy and other libraries. Do it yourself.
@@ -41,24 +42,27 @@ def analyze_data(data_1d):
     var /= len(data_1d)
 
     median = 0
-    data_1d.sort()
+    data_1d = sorted(data_1d)
+    data_len = len(data_1d)
     if (len(data_1d)%2 == 0) :
-        n = len(data_1d)/2
-        m = n+1
+        n = (data_len - 1) /2
+        m = (data_len +1 ) /2
         median = (data_1d[n] + data_1d[m])/2
     else:
-        n = int((len(data_1d)+1)/2)
-        median = data_1d[n]/2
+        n = int((data_len-1)/2)
+        median = data_1d[n]
 
     return mean, var, median, (min((data_1d))), (max((data_1d)))
 
 if __name__ == '__main__':
-    data = read_data('python02_lab\data\class_score_en.csv')
+    # data = read_data('python02_lab\data\class_score_en.csv')
+    data = read_data('data/class_score_en.csv')
     if data and len(data[0]) == 2: # Check 'data' is valid
         average = calc_weighted_average(data, [40/125, 60/100])
 
         # Write the analysis report as a markdown file
-        with open('python02_lab\class_score_analysis.md', 'w') as report:
+        # with open('python02_lab\class_score_analysis.md', 'w') as report:
+        with open('class_score_analysis.md', 'w') as report:
             report.write('### Individual Score\n\n')
             report.write('| Midterm | Final | Total |\n')
             report.write('| ------- | ----- | ----- |\n')
