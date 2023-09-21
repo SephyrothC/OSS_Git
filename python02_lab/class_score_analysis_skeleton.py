@@ -58,7 +58,7 @@ if __name__ == '__main__':
         average = calc_weighted_average(data, [40/125, 60/100])
 
         # Write the analysis report as a markdown file
-        with open('python02_lab\data\class_score_analysis.md', 'w') as report:
+        with open('python02_lab\class_score_analysis.md', 'w') as report:
             report.write('### Individual Score\n\n')
             report.write('| Midterm | Final | Total |\n')
             report.write('| ------- | ----- | ----- |\n')
