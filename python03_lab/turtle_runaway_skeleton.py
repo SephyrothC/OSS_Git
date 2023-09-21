@@ -1,7 +1,8 @@
 # This example is not working in Spyder directly (F5 or Run)
 # Please type '!python turtle_runaway.py' on IPython console in your Spyder.
 import tkinter as tk
-import turtle, random
+import turtle, random, pygame
+
 
 class RunawayGame:
     def __init__(self, canvas, runner, chaser, catch_radius=50):
@@ -40,6 +41,13 @@ class RunawayGame:
         self.ai_timer_msec = ai_timer_msec
         self.canvas.ontimer(self.step, self.ai_timer_msec)
 
+    def game_end(self, time) :
+        while 1 :
+            self.drawer.setpos(-150, 0)
+            self.drawer.write(f'Game Over', font=("comicsansms",50))
+            clock.tick(15)
+
+
     def step(self):
         self.runner.run_ai(self.chaser.pos(), self.chaser.heading())
         self.chaser.run_ai(self.runner.pos(), self.runner.heading())
@@ -50,6 +58,7 @@ class RunawayGame:
         self.drawer.penup()
         self.drawer.setpos(-300, 300)
         self.drawer.write(f'Is catched? {is_catched}')
+        if is_catched : self.game_end(0)
 
         # Note) The following line should be the last of this function to keep the game playing
         self.canvas.ontimer(self.step, self.ai_timer_msec)
