@@ -55,14 +55,14 @@ def analyze_data(data_1d):
     return mean, var, median, (min((data_1d))), (max((data_1d)))
 
 if __name__ == '__main__':
-    # data = read_data('python02_lab\data\class_score_en.csv')
-    data = read_data('data/class_score_en.csv')
+    data = read_data('python02_lab\data\class_score_en.csv')
+    # data = read_data('data/class_score_en.csv')
     if data and len(data[0]) == 2: # Check 'data' is valid
         average = calc_weighted_average(data, [40/125, 60/100])
 
         # Write the analysis report as a markdown file
-        # with open('python02_lab\class_score_analysis.md', 'w') as report:
-        with open('class_score_analysis.md', 'w') as report:
+        with open('python02_lab\class_score_analysis.md', 'w') as report:
+        # with open('class_score_analysis.md', 'w') as report:
             report.write('### Individual Score\n\n')
             report.write('| Midterm | Final | Total |\n')
             report.write('| ------- | ----- | ----- |\n')
