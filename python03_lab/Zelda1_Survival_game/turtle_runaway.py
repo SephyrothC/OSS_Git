@@ -19,9 +19,24 @@ Enemy_Width = 20
 Enemy_Height = 30
 Enemy_Velocity = 1
 
-#def of the background
+#load the background
 BackGround_Game = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\BG.png"), (WIDTH, HEIGHT))
 Background_Menu = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\MENU.png"), (WIDTH, HEIGHT))
+
+#load botton
+Play_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Play_Botton.png").convert_alpha()
+Score_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Score_Botton.png").convert_alpha()
+Quit_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Quit_Botton.png").convert_alpha()
+
+#create botton
+x = pygame.Surface.get_width(Play_img) #all bottons have the same size
+y = pygame.Surface.get_height(Play_img) #all bottons have the same size
+Play_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT/2 - y/5 , Play_img, 1/2)
+Score_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT/2 + y/3, Score_img, 1/2)
+Quit_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT - y/2 , Quit_img, 1/2)
+
+
+
 
 #def Font 
 FONT = pygame.font.SysFont("comicsans", 30)
@@ -47,11 +62,19 @@ def draw(player, elapsed_time, enemies):
 def Menu():
     menu_load = True
     while menu_load :
+        #draw background
         WIN.blit(Background_Menu, (0,0))
 
-        key = pygame.key.get_pressed()
-        if key[pygame.K_ESCAPE] :
+        #draw bottons
+        Play_Botton.draw(WIN)
+        Score_Botton.draw(WIN)
+        Quit_Botton.draw(WIN)
+
+        if Play_Botton.clicked :
             menu_load = False
+
+        if Quit_Botton.clicked :
+            pygame.quit()
 
         #Set a exit point
         for event in pygame.event.get() :
@@ -63,21 +86,16 @@ def Menu():
         
         pygame.display.update()
         
-    
 
 
 
 def main():
     
-    
-    
+    #game statement
     hit = False
-    
-    #start the menu
-    Menu()
-
-    #start the game
     run = True
+    load_menu = True
+    
 
     #def a clock
     clock = pygame.time.Clock()
@@ -98,6 +116,23 @@ def main():
     
 
     while run : #run the game
+
+        if load_menu :
+            #start the menu
+            Menu()
+            load_menu = False
+
+            #restart player
+            player = pygame.Rect(Player_position[0], Player_position[1], Player_Width, Player_Height)
+
+            #restart time
+            start_time = time.time()
+
+            #restart enemies
+            enemy_add_incresement = 2000
+            enemy_count = 0
+            enemy_dificulty = 2
+            enemies = []
 
         #Set a clock tick and count for add enemies
         enemy_count += clock.tick(60)
@@ -158,6 +193,10 @@ def main():
             player.y += Player_Velocity
         elif key[pygame.K_UP] and player.y - Player_Velocity >= 0:
             player.y -= Player_Velocity
+
+        #Pause game
+        if key[pygame.K_ESCAPE] :
+            load_menu = True
 
         #Add the enemy deplacement 
         for enemy in enemies[:] :
