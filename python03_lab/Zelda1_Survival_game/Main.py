@@ -79,7 +79,7 @@ def draw(player, elapsed_time, enemies, direction_player, enemies_direction):
         i += 1
 
     #Time
-    time_text = FONT.render(f"Time : {round(elapsed_time)}s", 1 , "white")
+    time_text = FONT.render(f"Time : {round(elapsed_time)}s", 1 , "red")
     WIN.blit(time_text, (10,10))
 
     pygame.display.update()
