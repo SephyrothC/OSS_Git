@@ -28,6 +28,12 @@ Play_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Play_Bot
 Score_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Score_Botton.png").convert_alpha()
 Quit_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Quit_Botton.png").convert_alpha()
 
+#Load player 
+Player_Down = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Link_Down.png"), (Player_Width, Player_Height))
+Player_Up = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Link_Up.png"), (Player_Width, Player_Height))
+Player_Left = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Link_Left.png"), (Player_Width, Player_Height))
+Player_Right = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Link_Right.png"), (Player_Width, Player_Height))
+
 #create botton
 x = pygame.Surface.get_width(Play_img) #all bottons have the same size
 y = pygame.Surface.get_height(Play_img) #all bottons have the same size
@@ -42,12 +48,16 @@ Quit_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT - y/2 , Quit_img, 1/2)
 FONT = pygame.font.SysFont("comicsans", 30)
 
 #Managing the display
-def draw(player, elapsed_time, enemies):
+def draw(player, elapsed_time, enemies, direction):
     #Background
     WIN.blit(BackGround_Game, (0,0))
 
     #Player
-    pygame.draw.rect(WIN, "red", player)
+    if(direction == 1) : WIN.blit(Player_Up, player)
+    if(direction == 2) : WIN.blit(Player_Right, player)
+    if(direction == 3) : WIN.blit(Player_Down, player)
+    if(direction == 4) : WIN.blit(Player_Left, player)
+
 
     #Enemies
     for enemy in enemies[:] :
@@ -105,7 +115,8 @@ def main():
     elapsed_time = 0
 
     #create a player
-    player = pygame.Rect(Player_position[0], Player_position[1], Player_Width, Player_Height)
+    player = Player_Down.get_rect(topleft = [Player_position[0], Player_position[1]])
+    direction = 3
 
     #create a enemy
     enemy_add_incresement = 2000
@@ -123,7 +134,8 @@ def main():
             load_menu = False
 
             #restart player
-            player = pygame.Rect(Player_position[0], Player_position[1], Player_Width, Player_Height)
+            player = Player_Down.get_rect(topleft = [Player_position[0], Player_position[1]])
+            direction = 3
 
             #restart time
             start_time = time.time()
@@ -183,16 +195,21 @@ def main():
                 run = False
                 break
         
+        
         #Get the player key press and set deplacement 
         key = pygame.key.get_pressed()
         if key[pygame.K_LEFT] and player.x - Player_Velocity >= 0:
-            player.x -= Player_Velocity
+            player.left -= Player_Velocity
+            direction = 4
         elif key[pygame.K_RIGHT] and player.x + Player_Velocity + Player_Width <= WIDTH:
-            player.x += Player_Velocity
+            player.right += Player_Velocity
+            direction = 2
         elif key[pygame.K_DOWN] and player.y + Player_Velocity + Player_Height <= HEIGHT:
-            player.y += Player_Velocity
+            player.bottom += Player_Velocity
+            direction = 3
         elif key[pygame.K_UP] and player.y - Player_Velocity >= 0:
-            player.y -= Player_Velocity
+            player.top -= Player_Velocity
+            direction = 1
 
         #Pause game
         if key[pygame.K_ESCAPE] :
@@ -221,9 +238,9 @@ def main():
             WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
             pygame.display.update()
             pygame.time.delay(4000)
-            break
+            load_menu = True
 
-        draw(player, elapsed_time, enemies) #draw the background, player, time elapsed
+        draw(player, elapsed_time, enemies, direction) #draw the background, player, time elapsed
 
     pygame.quit()
 
