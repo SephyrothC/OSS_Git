@@ -51,7 +51,7 @@ def Menu():
 
         key = pygame.key.get_pressed()
         if key[pygame.K_ESCAPE] :
-            pygame.quit()
+            menu_load = False
 
         #Set a exit point
         for event in pygame.event.get() :
