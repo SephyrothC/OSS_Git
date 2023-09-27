@@ -1,8 +1,11 @@
 import pygame, time, random
-import botton
+import botton, File, Scoring
 
 
 pygame.font.init() #initialize font module
+
+#Filename for scoreboard
+File_Name = "python03_lab\Zelda1_Survival_game\Scoreboard\score.csv"
 
 #def of the game window
 WIDTH, HEIGHT = 1000, 800
@@ -23,6 +26,7 @@ Enemy_Velocity = 1
 #load the background
 BackGround_Game = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\BG.png"), (WIDTH, HEIGHT))
 Background_Menu = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\MENU.png"), (WIDTH, HEIGHT))
+Scoreboard_BG = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\ScoreBord.png"), (WIDTH, HEIGHT))
 
 #load botton
 Play_img = pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\Play_Botton.png").convert_alpha()
@@ -47,10 +51,12 @@ y = pygame.Surface.get_height(Play_img) #all bottons have the same size
 Play_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT/2 - y/5 , Play_img, 1/2)
 Score_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT/2 + y/3, Score_img, 1/2)
 Quit_Botton = botton.Button(WIDTH/2 - x/4, HEIGHT - y/2 , Quit_img, 1/2)
+Quit_Botton_2 = botton.Button(WIDTH/2 - x/4, HEIGHT - y/2 , Quit_img, 1/2)
 
 
 #def Font 
 FONT = pygame.font.SysFont("comicsans", 30)
+    
 
 #Managing the display
 def draw(player, elapsed_time, enemies, direction_player, enemies_direction):
@@ -78,6 +84,41 @@ def draw(player, elapsed_time, enemies, direction_player, enemies_direction):
 
     pygame.display.update()
 
+def Scoreboard() :
+    menu_load = True
+    while menu_load :
+
+        #draw background
+        WIN.blit(Scoreboard_BG, (0,0))
+
+        text = FONT.render("Press Escape to quite", 1 , "white")
+        WIN.blit(text, (350, 725))
+
+        data = File.read_data(File_Name)
+        for i in range(len(data)) :
+            data_text = FONT.render(f"{data[i][0]}                             {data[i][1]}s",1,"white")
+            WIN.blit(data_text, (400, 290+i*100))
+
+
+        key = pygame.key.get_pressed()
+        #Quit ScoreBoard
+        if key[pygame.K_ESCAPE] :
+            menu_load = False
+        
+        
+        #Set a exit point
+        for event in pygame.event.get() :
+            if event.type == pygame.QUIT : #if the exit cross is clicked the game just cole himself
+                pygame.quit()
+                break
+        
+        pygame.display.update()
+    main()
+
+        
+
+        
+
 def Menu():
     menu_load = True
     while menu_load :
@@ -94,6 +135,11 @@ def Menu():
 
         if Quit_Botton.clicked :
             pygame.quit()
+            break
+
+        if Score_Botton.clicked :
+            Scoreboard()
+
 
         #Set a exit point
         for event in pygame.event.get() :
@@ -254,6 +300,7 @@ def main():
         if hit:
             lost_text = FONT.render(f"You lost!   Time : {round(elapsed_time)}s" , 1 , "white")
             WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
+            Scoring.score_update(File_Name, elapsed_time)
             pygame.display.update()
             pygame.time.delay(4000)
             hit = False
