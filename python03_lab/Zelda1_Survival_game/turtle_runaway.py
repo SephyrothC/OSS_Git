@@ -1,4 +1,6 @@
 import pygame, time, random
+import botton
+
 pygame.font.init() #initialize font module
 
 #def of the game window
@@ -18,7 +20,8 @@ Enemy_Height = 30
 Enemy_Velocity = 1
 
 #def of the background
-BackGround = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\BG.png"), (WIDTH, HEIGHT))
+BackGround_Game = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\BG.png"), (WIDTH, HEIGHT))
+Background_Menu = pygame.transform.scale(pygame.image.load("python03_lab\Zelda1_Survival_game\Sprites\MENU.png"), (WIDTH, HEIGHT))
 
 #def Font 
 FONT = pygame.font.SysFont("comicsans", 30)
@@ -26,7 +29,7 @@ FONT = pygame.font.SysFont("comicsans", 30)
 #Managing the display
 def draw(player, elapsed_time, enemies):
     #Background
-    WIN.blit(BackGround, (0,0))
+    WIN.blit(BackGround_Game, (0,0))
 
     #Player
     pygame.draw.rect(WIN, "red", player)
@@ -41,7 +44,39 @@ def draw(player, elapsed_time, enemies):
 
     pygame.display.update()
 
+def Menu():
+    menu_load = True
+    while menu_load :
+        WIN.blit(Background_Menu, (0,0))
+
+        key = pygame.key.get_pressed()
+        if key[pygame.K_ESCAPE] :
+            pygame.quit()
+
+        #Set a exit point
+        for event in pygame.event.get() :
+            if event.type == pygame.QUIT : #if the exit cross is clicked the game just cole himself
+                pygame.quit()
+                break
+        
+
+        
+        pygame.display.update()
+        
+    
+
+
+
 def main():
+    
+    
+    
+    hit = False
+    
+    #start the menu
+    Menu()
+
+    #start the game
     run = True
 
     #def a clock
@@ -60,7 +95,7 @@ def main():
     enemy_dificulty = 2
 
     enemies = []
-    hit = False
+    
 
     while run : #run the game
 
