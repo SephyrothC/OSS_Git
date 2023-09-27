@@ -94,6 +94,7 @@ def Scoreboard() :
         text = FONT.render("Press Escape to quite", 1 , "white")
         WIN.blit(text, (350, 725))
 
+        #Read file and write the scoreboard on screen
         data = File.read_data(File_Name)
         for i in range(len(data)) :
             data_text = FONT.render(f"{data[i][0]}                             {data[i][1]}s",1,"white")
@@ -134,8 +135,7 @@ def Menu():
             menu_load = False
 
         if Quit_Botton.clicked :
-            pygame.quit()
-            break
+            return False
 
         if Score_Botton.clicked :
             Scoreboard()
@@ -144,12 +144,12 @@ def Menu():
         #Set a exit point
         for event in pygame.event.get() :
             if event.type == pygame.QUIT : #if the exit cross is clicked the game just cole himself
-                pygame.quit()
-                break
+                return False
         
 
         
         pygame.display.update()
+    return True
 
 
 def main():
@@ -184,7 +184,7 @@ def main():
 
         if load_menu :
             #start the menu
-            Menu()
+            run = Menu()
             load_menu = False
 
             #restart player
@@ -200,6 +200,10 @@ def main():
             enemy_dificulty = 2
             enemies.clear()
             enemies_direction.clear()
+
+            #quit game
+            if run == False :
+                break
 
         #Set a clock tick and count for add enemies
         enemy_count += clock.tick(60)
@@ -297,17 +301,22 @@ def main():
                 break
             i += 1
         
+
         if hit:
+            #print the score
             lost_text = FONT.render(f"You lost!   Time : {round(elapsed_time)}s" , 1 , "white")
             WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
+
+            #update the scoreboard
             Scoring.score_update(File_Name, elapsed_time)
             pygame.display.update()
             pygame.time.delay(4000)
             hit = False
             load_menu = True
 
+        #draw the scene
         draw(player, elapsed_time, enemies, direction_player, enemies_direction) #draw the background, player, time elapsed
-
+    #quit
     pygame.quit()
 
 

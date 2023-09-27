@@ -1,5 +1,6 @@
 import File
 
+#check if the data can enter in the scoreboard
 def check_data(data, score) :
     data_score = []
     for i in range(len(data)):
@@ -14,6 +15,7 @@ def check_data(data, score) :
         data[i][1] = data_score[i]
     return data
 
+#update the scoreboard 
 def score_update(filename, score):
     data = File.read_data(filename)
     data = check_data(data, score)

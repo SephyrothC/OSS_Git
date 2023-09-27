@@ -1,5 +1,5 @@
 
-
+#read and convert data from the file
 def read_data(filename):
     f = open(filename, "r")
     data = []
@@ -11,6 +11,7 @@ def read_data(filename):
         data[i][1] = int(data[i][1])
     return data
 
+#write the data to a file
 def write_data(filename, data):
     f = open(filename, "w")
     for line in range(len(data)) :
