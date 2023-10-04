@@ -10,17 +10,28 @@ def read_data(filename):
 
 if __name__ == '__main__':
     # Load score data
-    class_kr = read_data('data/class_score_kr.csv')
-    class_en = read_data('data/class_score_en.csv')
+    class_kr = read_data('math01_lab/data/class_score_kr.csv')
+    class_en = read_data('math01_lab/data/class_score_en.csv')
 
     # TODO) Prepare midterm, final, and total scores
     midterm_kr, final_kr = zip(*class_kr)
     total_kr = [40/125*midterm + 60/100*final for (midterm, final) in class_kr]
-    midterm_en, final_en = [0, 0]
-    total_en = [0]
+    midterm_en, final_en = zip(*class_en)
+    total_en = [40/125*midterm + 60/100*final for (midterm, final) in class_en]
 
     # TODO) Plot midterm/final scores as points
+    # plt.scatter(midterm_kr,final_kr,label="Korean")
+    # plt.scatter(midterm_en,final_en, label="English")
+    # plt.title('Plot midterm/final scores as points')
+    # plt.xlim([0,125])
+    # plt.ylim([0,100])
+    # plt.xlabel('Midterm')
+    # plt.ylabel('Final')
+    # plt.grid()
+    # plt.show()
 
     # TODO) Plot total scores as a histogram
+    plt.hist(total_kr, bins=5, color='red', alpha=0.8)
+    plt.hist(total_en, bins=5, color='blue', alpha=0.8)
 
     plt.show()
