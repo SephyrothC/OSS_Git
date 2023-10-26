@@ -2,17 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
-if __name__ == '__main__':
-    # Define a cost function and its gradient
-    def f(x): return (1 - x[0])**2 + 100*(x[1] - x[0]**2)**2
-    # TODO: Fill the gradient vector as [df / dx[0], df / dx[1]]
 
-    def fd(x): return np.array(
-        [-2*(1 - x[0]) - 400*x[0]*(x[1] - x[0]**2), 200*(x[1] - x[0]**2)])
+# Define a cost function and its gradient
+def f(x): return (1 - x[0])**2 + 100*(x[1] - x[0]**2)**2
+# TODO: Fill the gradient vector as [df / dx[0], df / dx[1]]
+
+
+def fd(x):
+    return np.array([-2*(1 - x[0]) - 400*x[0]*(x[1] - x[0]**2), 200*(x[1] - x[0]**2)])
+
+
+if __name__ == '__main__':
 
     # Define configuration
-    x_init = [-1, 1]   # Please try other initial points
-    learn_rate = 0.01  # Please try 0.01, 0.005, and 0.0001
+    x_init = [-2, 3]   # Please try other initial points
+    learn_rate = 0.0001  # Please try 0.01, 0.005, and 0.0001
     max_iter = 10000   # Please try 100, 1000, and 100000
     min_tol = 1e-6
 
@@ -22,12 +26,7 @@ if __name__ == '__main__':
     for i in range(max_iter):
         # Run the gradient descent
         xp = x
-        if np.abs(x[0]) > 1e100 or np.abs(x[1]) > 1e100:
-            continue
-        grad = fd(x)
-        if np.any(np.isnan(grad)) or np.any(np.isinf(grad)):
-            continue
-        x = x - learn_rate * grad  # TODO: Implement your gradient descent
+        x = x - learn_rate * fd(x)  # TODO: Implement your gradient descent
         gd_xs.append(x)
 
         # Check the terminal condition
