@@ -15,7 +15,7 @@ def fd(x):
 if __name__ == '__main__':
 
     # Define configuration
-    x_init = [-2, 3]   # Please try other initial points
+    x_init = [-1, 1]   # Please try other initial points
     learn_rate = 0.0001  # Please try 0.01, 0.005, and 0.0001
     max_iter = 10000   # Please try 100, 1000, and 100000
     min_tol = 1e-6
