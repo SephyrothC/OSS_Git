@@ -5,7 +5,7 @@ import torch
 yolov5 = torch.hub.load('ultralytics/yolov5', 'yolov5l', pretrained=True)
 
 # Load an image on internet
-image = cv2.imread('deep learnig/test.jpg')
+image = cv2.imread('test.jpg')
 
 # Detect objects on the image using the YOLO
 results = yolov5(image)
